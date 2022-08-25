@@ -2,7 +2,6 @@
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 
 //error_reporting(E_ALL);
