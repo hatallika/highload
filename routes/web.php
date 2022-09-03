@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoggerController;
+use App\Http\Controllers\MemcachedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/logger', [LoggerController::class, 'index']);
+Route::get('/memcached', [MemcachedController::class, 'index'])->name('memcached');
