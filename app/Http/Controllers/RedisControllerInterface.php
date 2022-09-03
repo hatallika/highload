@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-interface MemcachedControllerInterface
+interface RedisControllerInterface
 {
     public function index(): JsonResponse;
 }
