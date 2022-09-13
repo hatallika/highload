@@ -2,7 +2,8 @@
 
 namespace App\Cache\Enums;
 
-enum CacheKeys: string
+enum Cache: string
 {
-    case MEMCACHE_KEY_INT = '_memcached_';
+    case MEMCACHE = 'memcached';
+    case REDIS = 'redis';
 }

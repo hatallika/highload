@@ -3,31 +3,19 @@
 namespace App\Services;
 
 use App\Cache\AppMemcachedInterface;
-use App\Cache\Enums\CacheKeys;
+use App\Cache\CacheInterface;
+use App\Cache\Enums\Cache;
+use App\Cache\Enums\CachePort;
 use Generator;
 
-class MemcacheService implements MemcacheServiceInterface
+class MemcacheService extends AbstractCacheService implements MemcacheServiceInterface
 {
 
-    public function __construct(private AppMemcachedInterface $cached)
+    protected function getConnection(): CacheInterface
     {
-        $this->cached->addServer('memcached',11211);
-    }
+        $memcached = $this->getAppMemcached();
+        $memcached->addServer(Cache::MEMCACHE->value, CachePort::MEMCACHE_PORT->value);
 
-    public function setValues(array $values): void
-    {
-        foreach ($values as $key=> $value)
-        {
-            $this->cached->set(CacheKeys::MEMCACHE_KEY_INT->value. $key, $value); //положили в кеш
-        }
-    }
-
-    public function getValues(array $keys): Generator
-    {
-        foreach ($keys as $key)
-        {
-            yield $key => $this->cached->get(CacheKeys::MEMCACHE_KEY_INT->value. $key);
-        }
-
+        return $memcached;
     }
 }
